@@ -7,3 +7,12 @@ export async function getTotalInsured(): Promise<string> {
   if (data.length > 0) return data[0].count;
   else return "0";
 }
+
+export async function getTotalPolicy(): Promise<string> {
+  const data = await prisma.$queryRaw<
+    { count: string }[]
+  >`select count(insurance_policy.id) from insurance_policy`;
+  if (data.length > 0) return data[0].count;
+  else return "0";
+}
+

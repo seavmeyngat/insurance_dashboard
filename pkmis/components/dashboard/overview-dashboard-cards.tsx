@@ -1,7 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getTotalInsured } from "@/services/dashboard/get-total-insured";
 import { getTotalSumInsured } from "@/services/dashboard/get-total-sum-insured";
-
+import { getTotalPolicy } from "@/services/dashboard/get-total-insured"
+import { getPremiumAmount } from "@/services/dashboard/get-total-sum-insured"
 export async function OverviewDashboardCards() {
   const totalSales = 10;
   const totalCustomers = 10;
@@ -12,7 +13,10 @@ export async function OverviewDashboardCards() {
 
   const totalSumInsured = await getTotalSumInsured();
   console.log(totalSumInsured);
+  
+  const totalPolicy = await getTotalPolicy();
 
+  const getTotalSumPremium = await getPremiumAmount(); 
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       <Card className="bg-red-50">
@@ -32,9 +36,9 @@ export async function OverviewDashboardCards() {
           </svg>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{totalSales.toFixed(2)}</div>
+          <div className="text-2xl font-bold">{totalPolicy.toString()}</div>
           <p className="text-xs text-muted-foreground">
-            Premium Amount: $10,000
+            Premium Amount: ${Number(getTotalSumPremium).toFixed(2)}
           </p>
         </CardContent>
       </Card>
